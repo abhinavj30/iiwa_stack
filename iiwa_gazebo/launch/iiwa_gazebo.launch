@@ -54,5 +54,6 @@
         
     </group>
     
+    <node name="joint_state_relay" pkg="topic_tools" type="relay" args="/iiwa/joint_states /joint_states" /> 
     
 </launch>
