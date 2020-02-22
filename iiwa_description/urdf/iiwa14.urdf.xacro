@@ -12,10 +12,68 @@
   
   <!-- Fix to world just for testing -->
   <link name="world"/>
+  <link name="base_link" />
   
   <!--iiwa-->
-  <xacro:iiwa14 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)" parent="world">
+  <xacro:iiwa14 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)" parent="base_link">
     <origin xyz="$(arg origin_xyz)" rpy="$(arg origin_rpy)" />
   </xacro:iiwa14>
+
+
+  <link name="table_link">
+      <visual>
+          <geometry>
+              <box size="2.0 0.8 0.022" />
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 -0.011" />
+          <material name="tan">
+              <color rgba="0.871 0.722 0.529 1" />
+          </material>
+      </visual>
+      <collision>
+          <geometry>
+              <box size="1.0 0.8 0.022" />
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 -0.011" />
+      </collision>
+  </link>
+  <link name="assembly_link">
+      <visual>
+          <geometry>
+              <box size="0.2 0.3 0.03" />
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 -0.015" />
+          <material name="blue">
+              <color rgba="0.5 0.5 1 1" />
+          </material>
+      </visual>
+      <collision>
+          <geometry>
+              <box size="0.2 0.3 0.03" />
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 -0.015" />
+      </collision>
+  </link>
+
+  <joint name="connect_base_table" type="fixed">
+      <parent link="world"/>
+      <child link="table_link"/>
+      <origin xyz="0 0 1" rpy="0 0 0" />
+  </joint>
+
+
+  <joint name="connect_table_world" type="fixed">
+      <parent link="table_link"/>
+      <child link="base_link"/>
+      <origin xyz="-0.5 0.2 0" rpy="0 0 0" />
+  </joint>
+
+  <joint name="connect_table_assembly" type="fixed">
+      <parent link="table_link"/>
+      <child link="assembly_link"/>
+      <origin xyz="0 0.2 0.03" rpy="0 0 0" />
+  </joint>
+
+
   
 </robot>

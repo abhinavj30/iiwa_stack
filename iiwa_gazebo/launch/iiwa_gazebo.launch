@@ -15,6 +15,7 @@
     <arg name="robot_name" default="iiwa" />
     <arg name="model" default="iiwa14"/>
     <arg name="trajectory" default="true"/>
+    <arg name="moveit" default="true"/>
     
     <!-- Loads the Gazebo world. -->
     <include file="$(find iiwa_gazebo)/launch/iiwa_world.launch">
@@ -52,6 +53,10 @@
             <arg name="model" value="$(arg model)" />
         </include>
         
+    </group>
+
+    <group if="$(arg moveit)">
+        <include file="$(find iiwa_moveit)/launch/move_group.launch" />
     </group>
     
     <node name="joint_state_relay" pkg="topic_tools" type="relay" args="/iiwa/joint_states /joint_states" /> 
