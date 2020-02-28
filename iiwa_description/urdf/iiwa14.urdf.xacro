@@ -55,14 +55,14 @@
       </collision>
   </link>
 
-  <joint name="connect_base_table" type="fixed">
+  <joint name="connect_table_world" type="fixed">
       <parent link="world"/>
       <child link="table_link"/>
-      <origin xyz="0 0 1" rpy="0 0 0" />
+      <origin xyz="0 0 0.8" rpy="0 0 0" />
   </joint>
 
 
-  <joint name="connect_table_world" type="fixed">
+  <joint name="connect_base_table" type="fixed">
       <parent link="table_link"/>
       <child link="base_link"/>
       <origin xyz="-0.5 0.2 0" rpy="0 0 0" />
